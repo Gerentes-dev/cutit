@@ -1,0 +1,31 @@
+name: Cutit, Upload artifact and Deploy to Heroku
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+#  test:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        java: [ 11, 17 ]
+#    name: Run unit tests on Java ${{ matrix.java }}
+#    steps:
+#      - uses: actions/checkout@master
+#      - name: Setup java
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: ${{ matrix.java }}
+#      - run: mvn -f pom.xml clean test
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: "srv-cv2bclbtq21c73df8so0"
+          api-key: "rnd_dqxhtm5LC1MNeIrKIcJWZABC5E7l"
+          wait-for-success: true

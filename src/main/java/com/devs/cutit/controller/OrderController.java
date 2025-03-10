@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/orders")
-@Tag(name = "Part Orders")
+@Tag(name = "Departure orders")
 public class OrderController {
 
     private OrderService orderService;

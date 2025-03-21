@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.sonarqube' version '4.3.0.3225'
 }
 
 group = 'com.devs'
@@ -11,11 +12,20 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+	sourceCompatibility = JavaVersion.VERSION_17
 }
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "Gerentes-dev_cutit"
+		property "sonar.organization", "gerentes-dev"
+		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
 

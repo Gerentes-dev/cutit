@@ -1,11 +1,8 @@
 package com.devs.cutit.controller;
 
 import com.devs.cutit.model.PartModel;
-import com.devs.cutit.model.PlanModel;
-import com.devs.cutit.repository.PlanPieceRepository;
 import com.devs.cutit.service.PartService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

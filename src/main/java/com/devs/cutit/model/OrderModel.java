@@ -30,12 +30,6 @@ public class OrderModel {
     @Column(name = "fecha", nullable = false)
     private LocalDateTime date;
 
-//    @Column(name = "id_despachos_id_orden", nullable = false)
-//    private UUID dispatchId;
-//
-//    @Col(name = "id_ordenes_salida_cierras_id_orden", nullable = false)
-//    private UUID depatureOrderId;
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

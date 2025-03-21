@@ -10,6 +10,10 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
     environment: 'develop'
+    env:
+      SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+      SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+      SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
         with:

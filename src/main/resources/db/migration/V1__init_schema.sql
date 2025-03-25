@@ -76,3 +76,14 @@ CREATE TABLE dispatchs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE Realizar_Requisicion (
+    id UUID PRIMARY KEY,
+    id_cierra_id UUID NOT NULL REFERENCES Cierra(id),
+    cantidad INT CHECK (cantidad BETWEEN 1 AND 100) NOT NULL,
+    fecha_requerida DATE NOT NULL,
+    observaciones TEXT,
+    estado VARCHAR(255) DEFAULT 'PENDIENTE' NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

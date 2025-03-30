@@ -35,31 +35,14 @@ public class PlanService {
         return planRepository.findBystatus(status);
     }
 
-    public PlanModel approvePlan(UUID id, Boolean approve) {
+    public PlanModel updateStatus(UUID id, String status) {
         Optional<PlanModel> optionalPlan = planRepository.findById(id);
         
         if (optionalPlan.isPresent()) {
             PlanModel plan = optionalPlan.get();
 
-            if (approve) {
-                plan.setStatus("APPROVED");
-                return planRepository.save(plan);
-            }
-        }
-
-        throw new EntityNotFoundException("Plano con ID: " + id + " no encontrado.");
-    }
-
-    public PlanModel rejectPlan(UUID id, Boolean reject) {
-        Optional<PlanModel> optionalPlan = planRepository.findById(id);
-        
-        if (optionalPlan.isPresent()) {
-            PlanModel plan = optionalPlan.get();
-
-            if (reject) {
-                plan.setStatus("REJECTED");
-                return planRepository.save(plan);
-            }
+            plan.setStatus(status);
+            return planRepository.save(plan);
         }
 
         throw new EntityNotFoundException("Plano con ID: " + id + " no encontrado.");

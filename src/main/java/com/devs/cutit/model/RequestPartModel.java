@@ -28,7 +28,7 @@ public class RequestPartModel extends BaseModel {
 
     //@ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_part", nullable = false)
+    @JoinColumn(name = "part_id", nullable = false)
     private PartModel part;
 
     @Column(name = "quantity", nullable = false)

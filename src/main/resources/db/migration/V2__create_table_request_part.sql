@@ -1,9 +1,11 @@
-CREATE TABLE Solicitar_Material (
+-- CREATE TYPE StatusRequestParts AS ENUM('PENDING', 'DELIVERED');
+
+CREATE TABLE request_parts (
     id UUID PRIMARY KEY,
-    id_pieza UUID NOT NULL REFERENCES Piezas(id),
-    cantidad INT DEFAULT 0 NOT NULL,
-    fecha TIMESTAMP NOT NULL,
-    estado VARCHAR(255) DEFAULT 'PENDIENTE' NOT NULL,
+    id_part UUID NOT NULL REFERENCES parts(id),
+    quantity INT DEFAULT 0 NOT NULL,
+    request_date TIMESTAMP NOT NULL,
+    status VARCHAR(255) DEFAULT 'PENDING' NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

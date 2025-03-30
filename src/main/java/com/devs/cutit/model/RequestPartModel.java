@@ -15,9 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ordenes_salida")
-public class OrderModel extends BaseModel {
-
+@Table(name = "request_parts")
+public class RequestPartModel extends BaseModel {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -27,6 +26,17 @@ public class OrderModel extends BaseModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDateTime date;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_part", nullable = false)
+    private PartModel part;
+
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
+    @Column(name = "request_date", nullable = false)
+    private LocalDateTime requestDate;
+
+    @Column(name = "status", nullable = false)
+    private String status;
 }

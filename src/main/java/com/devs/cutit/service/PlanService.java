@@ -2,6 +2,7 @@ package com.devs.cutit.service;
 
 import com.devs.cutit.model.PlanModel;
 import com.devs.cutit.repository.PlanRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,35 @@ public class PlanService {
 
     public List<Optional<PlanModel>>  getValidatedPlan(String status) {
         return planRepository.findBystatus(status);
+    }
+
+    public PlanModel approvePlan(UUID id, Boolean approve) {
+        Optional<PlanModel> optionalPlan = planRepository.findById(id);
+        
+        if (optionalPlan.isPresent()) {
+            PlanModel plan = optionalPlan.get();
+
+            if (approve) {
+                plan.setStatus(PlanModel.PlanStatus.APPROVED);
+                return planRepository.save(plan);
+            }
+        }
+
+        throw new EntityNotFoundException("Plano con ID: " + id + " no encontrado.");
+    }
+
+    public PlanModel rejectPlan(UUID id, Boolean reject) {
+        Optional<PlanModel> optionalPlan = planRepository.findById(id);
+        
+        if (optionalPlan.isPresent()) {
+            PlanModel plan = optionalPlan.get();
+
+            if (reject) {
+                plan.setStatus(PlanModel.PlanStatus.REJECTED);
+                return planRepository.save(plan);
+            }
+        }
+
+        throw new EntityNotFoundException("Plano con ID: " + id + " no encontrado.");
     }
 }

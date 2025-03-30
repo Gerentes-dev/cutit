@@ -19,6 +19,10 @@ import java.util.UUID;
 @Table(name = "plans")
 public class PlanModel extends BaseModel {
 
+    public enum PlanStatus {
+        PENDING, REJECTED, APPROVED
+    }
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -38,5 +42,5 @@ public class PlanModel extends BaseModel {
 
     private String note;
 
-    private String status;
+    private PlanStatus status;
 }

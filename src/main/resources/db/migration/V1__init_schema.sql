@@ -7,7 +7,7 @@ CREATE TABLE plans (
     description TEXT,
     attachment TEXT,
     note TEXT,
-    status Status,
+    status Status DEFAULT 'PENDING' NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -42,7 +42,7 @@ public class PlanService {
             PlanModel plan = optionalPlan.get();
 
             if (approve) {
-                plan.setStatus(PlanModel.PlanStatus.APPROVED);
+                plan.setStatus("APPROVED");
                 return planRepository.save(plan);
             }
         }
@@ -57,7 +57,7 @@ public class PlanService {
             PlanModel plan = optionalPlan.get();
 
             if (reject) {
-                plan.setStatus(PlanModel.PlanStatus.REJECTED);
+                plan.setStatus("REJECTED");
                 return planRepository.save(plan);
             }
         }

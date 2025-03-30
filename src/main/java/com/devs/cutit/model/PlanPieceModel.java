@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "parts_plans")
-public class PlanPieceModel {
+public class PlanPieceModel extends BaseModel {
 
     @Id
     @GeneratedValue(generator = "UUID")

@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PlanPieceRepository extends JpaRepository<PartModel, UUID> {
-    @Query("SELECT pp.pieza FROM PlanPieceModel pp WHERE pp.plano.id = :planoId")
-    List<PartModel> findPartsByPlanoId(@Param("planoId") UUID planoId);
+    @Query("SELECT pp.part FROM PlanPieceModel pp WHERE pp.plan.id = :plan_id")
+    List<PartModel> findPartsByPlanoId(@Param("plan_id") UUID planoId);
 }

@@ -33,8 +33,8 @@ public class PlanController {
     }
 
     @GetMapping("/search_validated")
-    public List<Optional<PlanModel>> searchValidated(@RequestParam Boolean validated) {
-        return planService.getValidatedPlan(validated);
+    public List<Optional<PlanModel>> searchValidated(@RequestParam String status) {
+        return planService.getValidatedPlan(status);
     }
 
     @PostMapping("/create")

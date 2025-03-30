@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "planos_piezas")
+@Table(name = "parts_plans")
 public class PlanPieceModel {
 
     @Id
@@ -28,13 +28,12 @@ public class PlanPieceModel {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_plano", referencedColumnName = "id", nullable = false)
-    private PlanModel plano;
+    @JoinColumn(name = "plan_id", referencedColumnName = "id", nullable = false)
+    private PlanModel plan;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pieza", referencedColumnName = "id", nullable = false)
-    private PartModel pieza;
+    @JoinColumn(name = "part_id", referencedColumnName = "id", nullable = false)
+    private PartModel part;
 
-    @Column(name = "cantidad", nullable = false)
     private Integer quantity;
 }

@@ -30,7 +30,7 @@ public class PlanService {
         return planRepository.findAll();
     }
 
-    public List<Optional<PlanModel>>  getValidatedPlan(Boolean isValidated) {
-        return planRepository.findByisValidated(isValidated);
+    public List<Optional<PlanModel>>  getValidatedPlan(String status) {
+        return planRepository.findBystatus(status);
     }
 }

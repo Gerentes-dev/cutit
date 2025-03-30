@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "planos")
+@Table(name = "plans")
 public class PlanModel {
 
     @Id
@@ -28,23 +28,17 @@ public class PlanModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "nombre", nullable = false)
     private String name;
 
-    @Column(name = "version", nullable = false)
     private Integer version;
 
-    @Column(name = "descripcion")
     private String description;
 
-    @Column(name = "adjunto")
-    private String attach;
+    private String attachment;
 
-    @Column(name = "nota")
     private String note;
 
-    @Column(name = "validado")
-    private Boolean isValidated;
+    private String status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

@@ -1,9 +1,7 @@
 package com.devs.cutit.service;
 
 import com.devs.cutit.model.OrderModel;
-import com.devs.cutit.model.PartModel;
 import com.devs.cutit.repository.OrderRepository;
-import com.devs.cutit.repository.PartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

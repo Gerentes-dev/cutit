@@ -1,5 +1,7 @@
 package com.devs.cutit.model;
 
+// Test comment
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ordenes_salida")
+@Table(name = "departure_orders")
 public class OrderModel {
 
     @Id
@@ -27,8 +29,7 @@ public class OrderModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime departure_date;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

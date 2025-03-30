@@ -1,5 +1,3 @@
-CREATE TYPE Status AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
-
 CREATE TABLE plans (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -7,7 +5,7 @@ CREATE TABLE plans (
     description TEXT,
     attachment TEXT,
     note TEXT,
-    status Status,
+    status VARCHAR(255) DEFAULT 'PENDING' NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

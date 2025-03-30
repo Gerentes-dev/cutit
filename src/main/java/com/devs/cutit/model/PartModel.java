@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "piezas")
+@Table(name = "parts")
 public class PartModel {
 
     @Id
@@ -28,13 +28,10 @@ public class PartModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "nombre", nullable = false)
     private String name;
 
-    @Column(name = "descripcion")
     private String description;
 
-    @Column(name = "cantidad")
     private Integer quantity;
 
     @Column(name = "created_at", nullable = false, updatable = false)

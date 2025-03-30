@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ordenes_salida")
+@Table(name = "departure_orders")
 public class OrderModel {
 
     @Id
@@ -29,8 +29,7 @@ public class OrderModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime departure_date;
 
 //    @Column(name = "id_despachos_id_orden", nullable = false)
 //    private UUID dispatchId;

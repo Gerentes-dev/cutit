@@ -11,5 +11,5 @@ import java.util.UUID;
 
 @Repository
 public interface PlanRepository extends JpaRepository<PlanModel, UUID> {
-    List<Optional<PlanModel>> findByisValidated(boolean isValidated);
+    List<Optional<PlanModel>> findBystatus(String status);
 }

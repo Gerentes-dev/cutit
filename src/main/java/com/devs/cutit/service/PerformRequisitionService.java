@@ -1,7 +1,8 @@
 package com.devs.cutit.service;
 
-import com.devs.cutit.model.OrderModel;
-import com.devs.cutit.model.PerformRequisitionModel;
+import com.devs.cutit.DTO.CreateRequisitionDTO;
+import com.devs.cutit.model.*;
+import com.devs.cutit.repository.ChainsawRepository;
 import com.devs.cutit.repository.OrderRepository;
 import com.devs.cutit.repository.PerformRequisitionRepository;
 import com.devs.cutit.repository.PartRepository;
@@ -14,14 +15,26 @@ import java.util.UUID;
 @Service
 public class PerformRequisitionService {
     private final PerformRequisitionRepository performRequisitionRepository;
+    private final ChainsawRepository chainsawRepository;
 
     @Autowired
-    public PerformRequisitionService(PerformRequisitionRepository performRequisitionRepository) {
+    public PerformRequisitionService(PerformRequisitionRepository performRequisitionRepository,ChainsawRepository chainsawRepository) {
         this.performRequisitionRepository = performRequisitionRepository;
+        this.chainsawRepository = chainsawRepository;
     }
 
-    public PerformRequisitionModel createPerformRequisition(PerformRequisitionModel performRequisitionModel) {
-        return performRequisitionRepository.save(performRequisitionModel);
+    public PerformRequisitionModel createPerformRequisition(CreateRequisitionDTO createRequisitionDTO) {
+        ChainsawModel chainsaw = chainsawRepository.findById(createRequisitionDTO.getChainsawId())
+                .orElseThrow(() -> new RuntimeException("Chainsaw not found"));
+
+        PerformRequisitionModel requisition = PerformRequisitionModel.builder()
+                .chainsawModel(chainsaw)
+                .quantity(createRequisitionDTO.getQuantity())
+                .requisitionDate(createRequisitionDTO.getRequisitionDate())
+                .observation(createRequisitionDTO.getObservation())
+                .status("PENDING") // Estado predeterminado
+                .build();
+        return performRequisitionRepository.save(requisition);
     }
 
 

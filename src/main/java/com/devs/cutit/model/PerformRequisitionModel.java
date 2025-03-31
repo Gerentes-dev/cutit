@@ -16,8 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "realizar_requisicion")
-public class PerformRequisitionModel {
+@Table(name = "requisitions")
+public class PerformRequisitionModel extends BaseModel{
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,36 +26,21 @@ public class PerformRequisitionModel {
     private UUID id;
 
     //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "cierra_id", referencedColumnName = "id", nullable = false)
-    //private CierraModel cierra;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chainsaw_id", referencedColumnName = "id", nullable = false)
+    private  ChainsawModel chainsawModel ;
 
-    @Column(name = "cantidad", nullable = false)
+    @Column(nullable = false)
     private Integer quantity;
 
-    @Column(name = "fecha_requerida", nullable = false)
-    private LocalDateTime date;
+    @Column(nullable = false)
+    private LocalDateTime requisitionDate;
 
-    @Column(name = "observaciones")
-    private String remarks;
+    private String observation;
 
-    @Column(name = "estado", nullable = false)
+    @Column(nullable = false)
     private String status;
 
-    @Column(name = "created_at", updatable = false, nullable = false)
-    private LocalDate createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private LocalDate updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
-        this.status = "Pendiente";
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDate.now();
-    }
 }

@@ -1,5 +1,6 @@
 package com.devs.cutit.controller;
 
+import com.devs.cutit.DTO.CreateRequisitionDTO;
 import com.devs.cutit.model.PerformRequisitionModel;
 import com.devs.cutit.service.PerformRequisitionService;
 
@@ -22,18 +23,13 @@ public class PerformRequisitionController {
     }
 
     @GetMapping("/search")
-    public PerformRequisitionModel searchPart(@RequestParam UUID id) {
+    public PerformRequisitionModel searchRequisition(@RequestParam UUID id) {
         return performRequisitionService.getPerformRequisition(id);
     }
 
     @PostMapping("/create")
-    public PerformRequisitionModel createPart(@RequestBody PerformRequisitionModel performRequisitionModel) {
-        return performRequisitionService.createPerformRequisition(performRequisitionModel);
-    }
-
-    @PutMapping("/edit")
-    public PerformRequisitionModel editPart(@RequestBody PerformRequisitionModel performRequisitionModel) {
-        return performRequisitionService.createPerformRequisition(performRequisitionModel);
+    public PerformRequisitionModel createRequisition(@RequestBody CreateRequisitionDTO createRequisitionDTO) {
+        return performRequisitionService.createPerformRequisition(createRequisitionDTO);
     }
 
     @GetMapping("/all")

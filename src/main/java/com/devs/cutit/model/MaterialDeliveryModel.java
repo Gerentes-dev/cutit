@@ -32,7 +32,7 @@ public class MaterialDeliveryModel extends BaseModel {
     private RequestPartModel requestParts;
 
     @Column(name = "quantity_delivered", nullable = false)
-    private int quantityDelivered;
+    private Integer quantityDelivered;
 
     @Column(name = "delivery_date", nullable = false)
     private LocalDateTime deliveryDate;

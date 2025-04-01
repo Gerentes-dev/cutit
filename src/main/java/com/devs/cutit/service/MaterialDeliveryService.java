@@ -1,44 +1,63 @@
 package com.devs.cutit.service;
 
+
 import com.devs.cutit.DTO.CreateMaterialDeliveryDTO;
 import com.devs.cutit.model.MaterialDeliveryModel;
 import com.devs.cutit.model.RequestPartModel;
+import com.devs.cutit.model.PartModel;
 import com.devs.cutit.repository.MaterialDeliveryRepository;
+import com.devs.cutit.repository.PartRepository;
 import com.devs.cutit.repository.RequestPartRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MaterialDeliveryService {
 
     private final MaterialDeliveryRepository materialDeliveryRepository;
-    private  final RequestPartRepository requestPartRepository;
+    private final RequestPartRepository requestPartRepository;
+    private final PartRepository partRepository;
 
-    public MaterialDeliveryService(MaterialDeliveryRepository materialDeliveryRepository, RequestPartRepository requestPartRepository) {
+    @Autowired
+    public MaterialDeliveryService(MaterialDeliveryRepository materialDeliveryRepository,
+                                   RequestPartRepository requestPartRepository,
+                                   PartRepository partRepository) {
         this.materialDeliveryRepository = materialDeliveryRepository;
         this.requestPartRepository = requestPartRepository;
+        this.partRepository = partRepository;
     }
 
-    public MaterialDeliveryModel registerDelivery(CreateMaterialDeliveryDTO createMaterialDeliveryDTO) {
-
-        RequestPartModel requestPartModel = requestPartRepository.findById(createMaterialDeliveryDTO.getRequestId())
-                .orElseThrow(() -> new RuntimeException("Part not found"));
-       // Long dblCantidadActual = materialDeliveryRepository.obtenerSumaPorRegistro(createMaterialDeliveryDTO.getRequestId());
-
-        if (requestPartModel.getQuantity() <= 0 || requestPartModel.getRequestDate() == null) {
-            throw new IllegalArgumentException("Missing or invalid required fields.");
+    public MaterialDeliveryModel registerDelivery(CreateMaterialDeliveryDTO dto) {
+        if (dto.getRequestId() == null || dto.getQuantityDelivered() == null || dto.getDeliveryDate() == null) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios.");
         }
 
-        MaterialDeliveryModel delivery = new MaterialDeliveryModel();
-        delivery.setRequestParts(requestPartModel) ;
-        delivery.setQuantityDelivered(createMaterialDeliveryDTO.getQuantityDelivered());
-        delivery.setDeliveryDate(createMaterialDeliveryDTO.getDeliveryDate());
+        RequestPartModel request = requestPartRepository.findById(dto.getRequestId())
+                .orElseThrow(() -> new EntityNotFoundException("Solicitud no encontrada"));
 
-        /*if (requestPartModel.getQuantity() >= (dblCantidadActual + createMaterialDeliveryDTO.getQuantityDelivered() )) {
-            requestPartRepository.updateStatus(createMaterialDeliveryDTO.getRequestId(),"Delivered");
+        if (dto.getQuantityDelivered() >= request.getQuantity()) {
+            request.setStatus("Delivered");
         } else {
-            requestPartRepository.updateStatus(createMaterialDeliveryDTO.getRequestId(),"Partially Delivered");
-        }*/
+            request.setStatus("Partially Delivered");
+        }
+
+        requestPartRepository.save(request);
+
+        PartModel part = partRepository.findById(request.getPart().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Parte no encontrada"));
+
+        part.setQuantity(part.getQuantity() + dto.getQuantityDelivered());
+        partRepository.save(part);
+
+        MaterialDeliveryModel delivery = MaterialDeliveryModel.builder()
+                .requestParts(request)
+                .quantityDelivered(dto.getQuantityDelivered())
+                .deliveryDate(dto.getDeliveryDate())
+                .build();
 
         return materialDeliveryRepository.save(delivery);
     }
 }
+

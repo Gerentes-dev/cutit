@@ -1,17 +1,14 @@
-package com.devs.cutit.services;
+package com.devs.cutit.service;
 
-import com.devs.cutit.DTO.PlanRequest;
 import com.devs.cutit.DTO.UpdateStatusRequest;
 import com.devs.cutit.model.PlanModel;
 import com.devs.cutit.repository.PlanRepository;
-import com.devs.cutit.service.PlanService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 

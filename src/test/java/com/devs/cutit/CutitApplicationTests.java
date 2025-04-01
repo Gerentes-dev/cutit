@@ -1,4 +1,4 @@
-package com.devs.cutit.service;
+package com.devs.cutit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

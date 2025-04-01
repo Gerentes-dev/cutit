@@ -1,5 +1,6 @@
 package com.devs.cutit.controller;
 
+import com.devs.cutit.DTO.UpdateStatusRequest;
 import com.devs.cutit.model.PlanModel;
 import com.devs.cutit.service.PlanService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,5 +46,10 @@ public class PlanController {
     @PutMapping("/edit")
     public PlanModel editPlan(@RequestBody PlanModel planModel) {
         return planService.createPlan(planModel);
+    }
+
+    @PutMapping("/updateStatus")
+    public PlanModel updateStatus(@RequestBody UpdateStatusRequest request) {
+        return planService.updateStatus(request.id, request.status);
     }
 }

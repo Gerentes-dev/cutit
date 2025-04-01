@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface RequestPartRepository extends JpaRepository<RequestPartModel, UUID> {
-    @Modifying
+   /* @Modifying
     @Transactional
     @Query("UPDATE request_parts p SET p.status = :newStatus WHERE p.id = :id")
-    int updateStatus(@Param("id") UUID id, @Param("newStatus") String newStatus);
+    int updateStatus(@Param("id") UUID id, @Param("newStatus") String newStatus);*/
 }

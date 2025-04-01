@@ -10,8 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface MaterialDeliveryRepository extends JpaRepository<MaterialDeliveryModel, UUID> {
-    @Query("SELECT SUM(t.quantity_delivered) FROM delivery_parts t WHERE t.request_id = :requestId")
-    Double obtenerSumaPorRegistro(
-            @Param("requestId") UUID requestId
-    );
+  /*  @Query("SELECT SUM(t.quantityDelivered) FROM MaterialDeliveryModel t WHERE t.requestId = :requestId")
+    Long obtenerSumaPorRegistro(@Param("requestId") UUID requestId); */
+
 }

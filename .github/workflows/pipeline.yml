@@ -39,7 +39,7 @@ jobs:
             docker rm spring-app || true
             docker run -d \
               --name spring-app \
-              -p 60002:8080 \
+              -p 60001:8080 \
               -e SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }} \
               -e SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }} \
               -e SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }} \

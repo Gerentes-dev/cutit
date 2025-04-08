@@ -37,4 +37,10 @@ jobs:
             docker load < spring-app.tar
             docker stop spring-app || true
             docker rm spring-app || true
-            docker run -d --name spring-app -p 60001:8080 spring-app
+            docker run -d \
+              --name spring-app \
+              -p 8080:8080 \
+              -e SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }} \
+              -e SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }} \
+              -e SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }} \
+              spring-app

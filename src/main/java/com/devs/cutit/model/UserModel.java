@@ -16,8 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "parts")
-public class PartModel extends BaseModel {
+@Table(name = "users")
+public class UserModel extends BaseModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,9 +28,10 @@ public class PartModel extends BaseModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    private String name;
+    private String username;
 
-    private String description;
+    private String password;
 
-    private Integer quantity;
+    private String status;
+
 }

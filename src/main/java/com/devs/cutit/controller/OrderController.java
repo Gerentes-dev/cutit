@@ -1,7 +1,6 @@
 package com.devs.cutit.controller;
 
 import com.devs.cutit.model.OrderModel;
-import com.devs.cutit.model.PartModel;
 import com.devs.cutit.service.OrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
+/* :) */
 
 @RestController
 @RequestMapping("/orders")

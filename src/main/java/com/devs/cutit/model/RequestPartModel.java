@@ -10,15 +10,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "parts")
-public class PartModel extends BaseModel {
-
+@Table(name = "request_parts")
+public class RequestPartModel extends BaseModel {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -28,9 +26,17 @@ public class PartModel extends BaseModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    private String name;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "part_id", nullable = false)
+    private PartModel part;
 
-    private String description;
-
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "request_date", nullable = false)
+    private LocalDateTime requestDate;
+
+    @Column(name = "status", nullable = false)
+    private String status;
 }

@@ -16,8 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "planos")
-public class PlanModel {
+@Table(name = "plans")
+public class PlanModel extends BaseModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,38 +28,15 @@ public class PlanModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "nombre", nullable = false)
     private String name;
 
-    @Column(name = "version", nullable = false)
     private Integer version;
 
-    @Column(name = "descripcion")
     private String description;
 
-    @Column(name = "adjunto")
-    private String attach;
+    private String attachment;
 
-    @Column(name = "nota")
     private String note;
 
-    @Column(name = "validado")
-    private Boolean isValidated;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    private String status;
 }

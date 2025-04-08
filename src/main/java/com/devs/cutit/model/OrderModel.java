@@ -1,5 +1,7 @@
 package com.devs.cutit.model;
 
+// Test comment
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ordenes_salida")
-public class OrderModel {
+@Table(name = "departure_orders")
+public class OrderModel extends BaseModel{
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -27,29 +29,5 @@ public class OrderModel {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDateTime date;
-
-//    @Column(name = "id_despachos_id_orden", nullable = false)
-//    private UUID dispatchId;
-//
-//    @Col(name = "id_ordenes_salida_cierras_id_orden", nullable = false)
-//    private UUID depatureOrderId;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    private LocalDateTime departure_date;
 }

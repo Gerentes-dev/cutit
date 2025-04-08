@@ -1,78 +1,79 @@
-CREATE TABLE Planos (
+CREATE TABLE plans (
     id UUID PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     version INT NOT NULL,
-    descripcion TEXT,
-    adjunto TEXT,
-    nota TEXT,
-    validado BOOL,
+    description TEXT,
+    attachment TEXT,
+    note TEXT,
+    status VARCHAR(255) DEFAULT 'PENDING' NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Piezas (
+CREATE TABLE parts (
     id UUID PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    descripcion TEXT,
-    cantidad INT DEFAULT 0 NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    quantity INT DEFAULT 0 NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Planos_Piezas (
+CREATE TABLE parts_plans (
     id UUID PRIMARY KEY,
-    id_plano UUID NOT NULL REFERENCES Planos(id),
-    id_pieza UUID NOT NULL REFERENCES Piezas(id),
-    cantidad INT NOT NULL
+    plan_id UUID NOT NULL REFERENCES plans(id),
+    part_id UUID NOT NULL REFERENCES parts(id),
+    quantity INT NOT NULL
 );
 
-CREATE TABLE Cierra (
+CREATE TABLE chainsaws (
     id UUID PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    plano UUID NOT NULL REFERENCES Planos(id),
-    descripcion TEXT,
-    tipo VARCHAR(50),
-    cantidad INT DEFAULT 0 NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    plan_id UUID NOT NULL REFERENCES plans(id),
+    description TEXT,
+    type VARCHAR(50),
+    quantity INT DEFAULT 0 NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Ordenes_Creacion (
+CREATE TABLE creation_orders (
     id UUID PRIMARY KEY,
-    fecha TIMESTAMP NOT NULL,
-    cliente VARCHAR(255) NOT NULL,
+    creation_date TIMESTAMP NOT NULL,
+    client VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Ordenes_Creacion_Cierra (
+CREATE TABLE chainsaw_creation_orders (
     id UUID PRIMARY KEY,
-    id_orden UUID NOT NULL REFERENCES Ordenes_Creacion(id),
-    id_cierra UUID NOT NULL REFERENCES Cierra(id),
-    cantidad INT NOT NULL
+    creation_order_id UUID NOT NULL REFERENCES creation_orders(id),
+    chainsaw_id UUID NOT NULL REFERENCES chainsaws(id),
+    quantity INT NOT NULL
 );
 
-CREATE TABLE Ordenes_Salida (
+CREATE TABLE departure_orders (
     id UUID PRIMARY KEY,
-    fecha TIMESTAMP NOT NULL,
+    departure_date TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Ordenes_Salida_Cierra (
+CREATE TABLE chainsaw_departure_orders (
     id UUID PRIMARY KEY,
-    id_orden UUID NOT NULL REFERENCES Ordenes_Salida(id),
-    id_cierra UUID NOT NULL REFERENCES Cierra(id),
-    cantidad INT NOT NULL
+    departure_order_id UUID NOT NULL REFERENCES departure_orders(id),
+    chainsaw_id UUID NOT NULL REFERENCES chainsaws(id),
+    quantity INT NOT NULL
 );
 
-CREATE TABLE Despachos (
+CREATE TABLE dispatchs (
     id UUID PRIMARY KEY,
-    id_orden UUID NOT NULL REFERENCES Ordenes_Salida(id),
-    id_cierra UUID NOT NULL REFERENCES Cierra(id),
-    cantidad_despachada INT NOT NULL,
-    cantidad_faltante INT NOT NULL,
-    fecha_despacho TIMESTAMP NOT NULL,
+    departure_order_id UUID NOT NULL REFERENCES departure_orders(id),
+    chainsaw_id UUID NOT NULL REFERENCES chainsaws(id),
+    quantity_dispatched INT NOT NULL,
+    quantity_missing INT NOT NULL,
+    dispatch_date TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
